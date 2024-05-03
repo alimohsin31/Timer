@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <title>Document</title>
+
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  line-height: 1.5em;
+  font-size: 80%;
+  text-align: center;
+  /* color: #8f5a4c; */
+  color: #ffffff;
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  text-align: center;
+  /* color: #8f5a4c; */
+  color: #ffffff;
+}
+
+body {
+  width: 100%;
+  font-size: 24px;
+  /* background-color: #2b1b17; */
+  background-color: #000000;
+}
+
+body,
+button,
+input {
+  font-family: "Share Tech Mono", monospace;
+}
+
+button,
+input {
+  font-size: 100%;
+  margin-bottom: 1rem;
+}
+
+button {
+  outline: none !important;
+  cursor: pointer;
+  border: 0;
+}
+
+button::-moz-focus-inner {
+  border: 0 !important;
+}
+
+.device-body {
+  /* color: #eac29a; */
+  color: #ffffff;
+  width: 90%;
+  margin: 1em auto;
+  max-width: 600px;
+  min-width: 240px;
+  /* background-color: #2b1b17; */
+  background-color: #000000;
+  padding: 1em;
+}
+.device-body button {
+  /* color: #eac29a; */
+  color: #ffffff;
+  background: none;
+}
+.device-body .panel {
+  height: 40px;
+  text-align: center;
+  margin-bottom: 1em;
+}
+.device-body .panel button {
+  border-radius: 10px;
+  display: inline-block;
+  /* border: 1px solid #8f5a4c; */
+  border: 1px solid #ffffff;
+  vertical-align: top;
+  width: 60px;
+  height: 100%;
+}
+.device-body .break-settings button,
+.device-body .session-settings button {
+  border-radius: 50%;
+  /* border: 1px solid #8f5a4c; */
+  border: 1px solid #ffffff;
+  width: 40px;
+  height: 40px;
+}
+
+.break-settings {
+  margin: 0.8em 0;
+  display: inline-block;
+}
+
+.session-settings {
+  margin: 0.8em 0;
+  /* float: right; */
+  text-align: center;
+}
+
+.break-length,
+.session-length {
+  text-align: center;
+  width: 1.5em;
+  display: inline-block;
+}
+
+.timer-display {
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+  /* font-size: 2em; */
+  font-size: 1.5em;
+  width: 200px;
+  height: 200px;
+}
+.timer-display div {
+  line-height: 180px;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  width: 180px;
+  height: 180px;
+}
+.timer-display svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+}
+
+svg > path,
+.circle-dynamic, .circle-dynamic1, .circle-dynamic2, .circle-dynamic3, .circle-dynamic4 {
+  /* stroke: #4c3029; */
+  /* stroke: #FF0000; */
+  stroke: #ffffff;
+  /* stroke-width: 2px; */
+  stroke-width: 12px;
+  fill: none;
+}
+
+.circle-static, .circle-static2 {
+  stroke-width: 14px;
+  stroke: #ffffff;
+  fill: none;
+}
+
+.circle-static1 {
+  stroke-width: 14px;
+  /* stroke-width: 8px; */
+  /* stroke: #211512; */
+  /* stroke: #ffffff; */
+  stroke: #FF0000;
+  fill: none;
+}
+
+.play-btn {
+  display: inline-block;
+  width: 30px;
+  padding-left: 7px;
+}
+.play-btn span {
+  display: inline-block;
+  border-top: 7px solid transparent;
+  border-left: 14px solid;
+  border-bottom: 7px solid transparent;
+}
+
+.pause-btn {
+  width: 30px;
+  display: inline-block;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+.pause-btn span {
+  display: block;
+  height: 14px;
+  width: 0;
+  border: 2px solid;
+  float: left;
+}
+.pause-btn :last-child {
+  float: right;
+}
+
+.reset-btn {
+  width: 30px;
+  display: inline-block;
+  position: relative;
+}
+.reset-btn span {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border: 3px solid;
+  border-radius: 50%;
+}
+.reset-btn span:before {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  content: "";
+  width: 6px;
+  height: 10px;
+  background-color: #2b1b17;
+}
+.reset-btn span:after {
+  position: absolute;
+  top: 3px;
+  left: 14px;
+  content: "";
+  width: 0;
+  height: 6px;
+  border: 1px solid;
+}
+
+.mainClocks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .session-settings,
+.break-settings {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+  .mainClocks{
+    flex-direction: column;
+  }
+}
+
+.device-body-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+#timer-text{
+    color: #ffffff!important;
+}
+h5{
+    text-align: center;
+    margin: 1rem 0;
+}
+    </style>
+</head>
+<body>
+    <h2>Clock Timer App</h2>
+    <div class="mainClocks">
+        <div class="device-body">
+            <h2>Timer 1</h2>
+            <h4 id="timer-body-title" style="text-align: center;"></h4>
+            <div style="text-align: center;">
+                <input type="text"  id="devive_title" placeholder="Title" style="width: -webkit-fill-available;"/>
+            </div>
+            <div class="device-body-title" id="device-body-title" style="text-align: center;">
+                
+                <input type="number" style="width: 20%; text-align: end; color:#ffffff; border-radius: 5px; margin-right: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-hours-input" placeholder="00" />
+                <span>:</span>
+                <input type="number" style="width: 24%; text-align: center; color:#ffffff; border-radius: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-minutes-input" placeholder="00" />
+                
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" id="1" value="Enter" onclick="sessionTimeInput()" style="text-align: center; margin-bottom: 0!important; padding: 0 24px!important;"/>
+            </div>
+
+            <h5 id="device-title"></h5>
+            <div class="panel">
+                <button id="start-btn" title="Play"><span class="play-btn"><span></span></span></button>
+                <button id="pause-btn" title="Pause"><span class="pause-btn"><span></span><span></span></span></button>
+                <button id="reset-btn" title="Reset"><i class="fa-solid fa-rotate-right reset-btn"></i><span></span></button>
+            </div>
+            <!-- <div style="text-align: center; margin-bottom: 1rem;">
+                <text id="timer-text" x="50%" y="50%" text-anchor="middle" fill="white" dominant-baseline="middle" font-size="0.5em">00:00</text>
+            </div> -->
+            <div class="timer-display">
+                
+                <svg id="arc-timer" style="transform: rotate(90deg);">
+                    <circle class="circle-static" id="circle-static" cx="100" cy="100" r="90" />
+                    <circle class="circle-dynamic" id="dynamic-circle" cx="100" cy="100" />
+                    <path id="arc"></path>
+                    <!-- <text id="timer-text" x="50%" y="50%" text-anchor="middle" fill="white" dominant-baseline="middle" font-size="0.5em">00:00</text> -->
+                    <div>
+                        <text style="font-size: 1rem;" id="timer-text" x="50%" y="50%" text-anchor="middle" fill="white" dominant-baseline="middle" font-size="0.5em">00:00</text>
+                    </div>
+                </svg>
+            </div>
+    
+            <!-- <div class="session-settings">
+                <p>Enter Time in Minutes</p>
+                <div class="device-body-title">
+                    <input type="number" style="width: 70%;border-radius: 5px;" id="session-time-input" placeholder="Time" />
+                    <input type="submit" id="1" value="submit" onclick="sessionTimeInput()" />
+                </div>
+            </div> -->
+            <audio id="audio1" src="./bomb_timer.mp3"></audio>
+        </div>
+
+        <div class="device-body">
+            <h2>Timer 2</h2>
+            <h4 id="timer-body-title1" style="text-align: center;"></h4>
+            <div style="text-align: center;margin: 0 auto;">
+                <input type="text"  id="devive_title1" placeholder="Title" style="width: -webkit-fill-available;"/>
+            </div>
+            <div class="device-body-title" id="device-body-title1" style="text-align: center;">
+                <input type="number" style="width: 20%; text-align: end; color:#ffffff; border-radius: 5px; margin-right: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-hours-input1" placeholder="00" />
+                <span>:</span>
+                <input type="number" style="width: 24%; text-align: center; color:#ffffff; border-radius: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-minutes-input1" placeholder="00" />
+                
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" id="2" value="Enter" onclick="sessionTimeInput1()" style="text-align: center; margin-bottom: 0!important; padding: 0 24px!important;"/>
+            </div>
+            
+            <h5 id="device-title"></h5>
+            <div class="panel">
+                <button id="start-btn1" title="Play"><span class="play-btn"><span></span></span></button>
+                <button id="pause-btn1" title="Pause"><span class="pause-btn"><span></span><span></span></span></button>
+                <button id="reset-btn1" title="Reset"><i class="fa-solid fa-rotate-right reset-btn"></i><span></span></button>
+            </div>
+            <div class="timer-display">
+                <svg id="arc-timer" style="transform: rotate(90deg);">
+                    <circle class="circle-static" id="circle-static1" cx="100" cy="100" r="90" />
+                    <circle class="circle-dynamic1" id="dynamic-circle1" cx="100" cy="100" />
+                    <path id="arc1"></path>
+                    <div>
+                        <text style="font-size: 1rem;" id="timer-text1" x="50%" y="50%" text-anchor="middle" fill="white" dominant-baseline="middle" font-size="0.5em">00:00</text>
+                    </div>
+                </svg>
+            </div>
+    
+            <!-- <div class="session-settings">
+                <p>Enter Time in Minutes</p>
+                <div class="device-body-title">
+                    <input type="number" style="width: 70%;border-radius: 5px;" id="session-time-input" placeholder="Time" />
+                    <input type="submit" id="1" value="submit" onclick="sessionTimeInput()" />
+                </div>
+            </div> -->
+            <audio id="audio1" src="./bomb_timer.mp3"></audio>
+        </div>
+
+        <div class="device-body">
+            <h2>Timer 3</h2>
+            <h4 id="timer-body-title2" style="text-align: center;"></h4>
+            <div style="text-align: center;margin: 0 auto;">
+                <input type="text"  id="devive_title2" placeholder="Title" style="width: -webkit-fill-available;"/>
+            </div>
+            <div class="device-body-title" id="device-body-title2" style="text-align: center;">
+                <input type="number" style="width: 20%; text-align: end; color:#ffffff; border-radius: 5px; margin-right: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-hours-input2" placeholder="00" />
+                <span>:</span>
+                <input type="number" style="width: 24%; text-align: center; color:#ffffff; border-radius: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-minutes-input2" placeholder="00" />
+                
+            </div>
+
+            <div style="text-align: center;">
+                <input type="submit" id="3" value="Enter" onclick="sessionTimeInput2()" style="text-align: center; margin-bottom: 0!important; padding: 0 24px!important;"/>
+            </div>
+            
+            <h5 id="device-title"></h5>
+            <div class="panel">
+                <button id="start-btn2" title="Play"><span class="play-btn"><span></span></span></button>
+                <button id="pause-btn2" title="Pause"><span class="pause-btn"><span></span><span></span></span></button>
+                <button id="reset-btn2" title="Reset"><i class="fa-solid fa-rotate-right reset-btn"></i><span></span></button>
+            </div>
+            <div class="timer-display">
+                <svg id="arc-timer" style="transform: rotate(90deg);">
+                    <circle class="circle-static" id="circle-static2" cx="100" cy="100" r="90" />
+                    <circle class="circle-dynamic2" id="dynamic-circle2" cx="100" cy="100" />
+                    <path id="arc2"></path>
+                    <div>
+                        <text style="font-size: 1rem;" id="timer-text2" x="50%" y="50%" text-anchor="middle" fill="white" dominant-baseline="middle" font-size="0.5em">00:00</text>
+                    </div>
+                </svg>
+            </div>
+    
+            <!-- <div class="session-settings">
+                <p>Enter Time in Minutes</p>
+                <div class="device-body-title">
+                    <input type="number" style="width: 70%;border-radius: 5px;" id="session-time-input" placeholder="Time" />
+                    <input type="submit" id="1" value="submit" onclick="sessionTimeInput()" />
+                </div>
+            </div> -->
+            <audio id="audio1" src="./bomb_timer.mp3"></audio>
+        </div>
+
+        <div class="device-body">
+            <h2>Timer 4</h2>
+            <h4 id="timer-body-title3" style="text-align: center;"></h4>
+            <div style="text-align: center;margin: 0 auto;">
+                <input type="text"  id="devive_title3" placeholder="Title" style="width: -webkit-fill-available;"/>
+            </div>
+            <div class="device-body-title" id="device-body-title3" style="text-align: center;">
+                <input type="number" style="width: 20%; text-align: end; color:#ffffff; border-radius: 5px; margin-right: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-hours-input3" placeholder="00" />
+                <span>:</span>
+                <input type="number" style="width: 24%; text-align: center; color:#ffffff; border-radius: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-minutes-input3" placeholder="00" />
+                <!-- <input type="submit" id="1" value="Submit" onclick="sessionTimeInput3()" style="margin-bottom: 0!important;font-size: 14px!important; padding: 0 8px!important"/> -->
+            </div>
+
+            <div style="text-align: center;">
+                <input type="submit" id="4" value="Enter" onclick="sessionTimeInput3()" style="text-align: center; margin-bottom: 0!important; padding: 0 24px!important;"/>
+            </div>
+            
+            <h5 id="device-title"></h5>
+            <div class="panel">
+                <button id="start-btn3" title="Play"><span class="play-btn"><span></span></span></button>
+                <button id="pause-btn3" title="Pause"><span class="pause-btn"><span></span><span></span></span></button>
+                <button id="reset-btn3" title="Reset"><i class="fa-solid fa-rotate-right reset-btn"></i><span></span></button>
+            </div>
+            <div class="timer-display">
+                <svg id="arc-timer" style="transform: rotate(90deg);">
+                    <circle class="circle-static" id="circle-static3" cx="100" cy="100" r="90" />
+                    <circle class="circle-dynamic3" id="dynamic-circle3" cx="100" cy="100" />
+                    <path id="arc3"></path>
+                    <div>
+                        <text style="font-size: 1rem;" id="timer-text3" x="50%" y="50%" text-anchor="middle" fill="white" dominant-baseline="middle" font-size="0.5em">00:00</text>
+                    </div>
+                </svg>
+            </div>
+    
+            <!-- <div class="session-settings">
+                <p>Enter Time in Minutes</p>
+                <div class="device-body-title">
+                    <input type="number" style="width: 70%;border-radius: 5px;" id="session-time-input" placeholder="Time" />
+                    <input type="submit" id="1" value="submit" onclick="sessionTimeInput()" />
+                </div>
+            </div> -->
+            <audio id="audio1" src="./bomb_timer.mp3"></audio>
+        </div>
+
+        <div class="device-body">
+            <h2>Timer 5</h2>
+            <h4 id="timer-body-title4" style="text-align: center;"></h4>
+            <div style="text-align: center;margin: 0 auto;">
+                <input type="text"  id="devive_title4" placeholder="Title" style="width: -webkit-fill-available;"/>
+            </div>
+            <div class="device-body-title" id="device-body-title4" style="text-align: center;">
+                <input type="number" style="width: 20%; text-align: end; color:#ffffff; border-radius: 5px; margin-right: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-hours-input4" placeholder="00" />
+                <span>:</span>
+                <input type="number" style="width: 24%; text-align: center; color:#ffffff; border-radius: 5px; margin-bottom: 0!important; background: black; border-color: black;border-width: 0;" id="session-minutes-input4" placeholder="00" />
+                <!-- <input type="submit" id="1" value="Submit" onclick="sessionTimeInput4()" style="margin-bottom: 0!important;font-size: 14px!important; padding: 0 8px!important"/> -->
+            </div>
+
+            <div style="text-align: center;">
+                <input type="submit" id="5" value="Enter" onclick="sessionTimeInput4()" style="text-align: center; margin-bottom: 0!important; padding: 0 24px!important;"/>
+            </div>
+            
+            <h5 id="device-title"></h5>
+            <div class="panel">
+                <button id="start-btn4" title="Play"><span class="play-btn"><span></span></span></button>
+                <button id="pause-btn4" title="Pause"><span class="pause-btn"><span></span><span></span></span></button>
+                <button id="reset-btn4" title="Reset"><i class="fa-solid fa-rotate-right reset-btn"></i><span></span></button>
+            </div>
+            <div class="timer-display">
+                <svg id="arc-timer" style="transform: rotate(90deg);">
+                    <circle class="circle-static" id="circle-static4" cx="100" cy="100" r="90" />
+                    <circle class="circle-dynamic4" id="dynamic-circle4" cx="100" cy="100" />
+                    <path id="arc4"></path>
+                    <div>
+                        <text style="font-size: 1rem;" id="timer-text4" x="50%" y="50%" text-anchor="middle" fill="white" dominant-baseline="middle" font-size="0.5em">00:00</text>
+                    </div>
+                </svg>
+            </div>
+    
+            <!-- <div class="session-settings">
+                <p>Enter Time in Minutes</p>
+                <div class="device-body-title">
+                    <input type="number" style="width: 70%;border-radius: 5px;" id="session-time-input" placeholder="Time" />
+                    <input type="submit" id="1" value="submit" onclick="sessionTimeInput()" />
+                </div>
+            </div> -->
+            <audio id="audio1" src="./bomb_timer.mp3"></audio>
+        </div>
+        
+    </div>
+
+    <script>
+        
+        let val = 0;
+    let sessionLength = 0;
+    let timer;
+
+    let val1 = 0;
+    let sessionLength1 = 0;
+    let timer1;
+
+    let val2 = 0;
+    let sessionLength2 = 0;
+    let timer2;
+
+    let val3 = 0;
+    let sessionLength3 = 0;
+    let timer3;
+
+    let val4 = 0;
+    let sessionLength4 = 0;
+    let timer4;
+
+    function showSessionLength() {
+        document.getElementById('timer-text').textContent = formatTime(sessionLength);
+    }
+
+    function showSessionLength1() {
+        document.getElementById('timer-text1').textContent = formatTime(sessionLength1);
+    }
+
+    function showSessionLength2() {
+        document.getElementById('timer-text2').textContent = formatTime(sessionLength2);
+    }
+
+    function showSessionLength3() {
+        document.getElementById('timer-text3').textContent = formatTime(sessionLength3);
+    }
+
+    function showSessionLength4() {
+        document.getElementById('timer-text4').textContent = formatTime(sessionLength4);
+    }
+
+    function showTime() {
+        document.getElementById('timer-text').textContent = formatTime(val);
+        let progress = (sessionLength - val) / sessionLength;
+        // updateCircleProgress('1', progress);
+    }
+
+    function showTime1() {
+        document.getElementById('timer-text1').textContent = formatTime(val1);
+        let progress = (sessionLength1 - val1) / sessionLength1;
+        // updateCircleProgress('arc1', progress);
+    }
+
+    function showTime2() {
+        document.getElementById('timer-text2').textContent = formatTime(val2);
+        let progress = (sessionLength2 - val2) / sessionLength2;
+        // updateCircleProgress('arc1', progress);
+    }
+
+    function showTime3() {
+        document.getElementById('timer-text3').textContent = formatTime(val3);
+        let progress = (sessionLength3 - val3) / sessionLength3;
+        // updateCircleProgress('arc1', progress);
+    }
+
+    function showTime4() {
+        document.getElementById('timer-text4').textContent = formatTime(val4);
+        let progress = (sessionLength4 - val4) / sessionLength4;
+        // updateCircleProgress('arc1', progress);
+    }
+
+    function formatTime(time) {
+        let hours = Math.floor(time / 3600);
+        let minutes = Math.floor((time % 3600) / 60);
+        let seconds = time % 60;
+        return `${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    function formatTimeInput(input) {
+        input.value = input.value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+    }
+
+    function sessionTimeInput() {
+        // for Title
+
+        var Title = document.getElementById('devive_title').value;
+        
+        document.getElementById('timer-body-title').innerHTML=Title;
+        let titleDisplay = document.getElementById('devive_title');
+        let titleDisplayInputs = document.getElementById('device-body-title');
+        let titleDisplayButton = document.getElementById('1');
+        titleDisplay.style.display="none";
+        titleDisplayInputs.style.display="none";
+        titleDisplayButton.style.display="none";
+        document.getElementById('devive_title').value = "";
+        
+        console.warn(Title)
+        // for title ends
+
+        var hours = parseInt(document.getElementById('session-hours-input').value) || 0;
+        var minutes = parseInt(document.getElementById('session-minutes-input').value) || 0;
+        if (hours >= 0 && minutes >= 0) {
+            sessionLength = (hours * 3600) + (minutes * 60);
+            val = sessionLength;
+            showSessionLength();
+            showTime();
+            document.getElementById('session-hours-input').value = '';
+            document.getElementById('session-minutes-input').value = '';
+        }
+
+        // for removing and adding class
+
+        var strokeColor = document.getElementById("circle-static");
+            strokeColor.classList.add("circle-static1");
+            strokeColor.classList.remove("circle-static");
+    }
+
+    function sessionTimeInput1() {
+
+        var hours = parseInt(document.getElementById('session-hours-input1').value) || 0;
+        var minutes = parseInt(document.getElementById('session-minutes-input1').value) || 0;
+        if (hours >= 0 && minutes >= 0) {
+            sessionLength1 = (hours * 3600) + (minutes * 60);
+            val1 = sessionLength1;
+            showSessionLength1();
+            showTime1();
+            document.getElementById('session-hours-input1').value = '';
+            document.getElementById('session-minutes-input1').value = '';
+        }
+
+        var Title1 = document.getElementById('devive_title1').value;
+        
+        document.getElementById('timer-body-title1').innerHTML=Title1;
+        let titleDisplay1 = document.getElementById('devive_title1');
+        let titleDisplayInputs1 = document.getElementById('device-body-title1');
+        let titleDisplayButton1 = document.getElementById('2');
+        titleDisplay1.style.display="none";
+        titleDisplayInputs1.style.display="none";
+        titleDisplayButton1.style.display="none";
+        document.getElementById('devive_title1').value = "";
+        
+        console.warn(Title1)
+        // for title ends
+
+        var strokeColor1 = document.getElementById("circle-static1");
+        console.warn(strokeColor1);
+            strokeColor1.classList.remove("circle-static");         
+            strokeColor1.classList.add("circle-static1");
+    }
+
+    function sessionTimeInput2() {
+        var hours = parseInt(document.getElementById('session-hours-input2').value) || 0;
+        var minutes = parseInt(document.getElementById('session-minutes-input2').value) || 0;
+        if (hours >= 0 && minutes >= 0) {
+            sessionLength2 = (hours * 3600) + (minutes * 60);
+            val2 = sessionLength2;
+            showSessionLength2();
+            showTime2();
+            document.getElementById('session-hours-input2').value = '';
+            document.getElementById('session-minutes-input2').value = '';
+        }
+
+        var Title2 = document.getElementById('devive_title2').value;
+        
+        document.getElementById('timer-body-title2').innerHTML=Title2;
+        let titleDisplay2 = document.getElementById('devive_title2');
+        let titleDisplayInputs2 = document.getElementById('device-body-title2');
+        let titleDisplayButton2 = document.getElementById('3');
+        titleDisplay2.style.display="none";
+        titleDisplayInputs2.style.display="none";
+        titleDisplayButton2.style.display="none";
+        document.getElementById('devive_title2').value = "";
+        
+        console.warn(Title2)
+        // for title ends
+
+        var strokeColor2 = document.getElementById("circle-static2");
+        console.warn(strokeColor2);
+            strokeColor2.classList.remove("circle-static");         
+            strokeColor2.classList.add("circle-static1");
+
+
+    }
+
+    function sessionTimeInput3() {
+        var hours = parseInt(document.getElementById('session-hours-input3').value) || 0;
+        var minutes = parseInt(document.getElementById('session-minutes-input3').value) || 0;
+        if (hours >= 0 && minutes >= 0) {
+            sessionLength3 = (hours * 3600) + (minutes * 60);
+            val3 = sessionLength3;
+            showSessionLength3();
+            showTime3();
+            document.getElementById('session-hours-input3').value = '';
+            document.getElementById('session-minutes-input3').value = '';
+        }
+
+        var Title3 = document.getElementById('devive_title3').value;
+        
+        document.getElementById('timer-body-title3').innerHTML=Title3;
+        let titleDisplay3 = document.getElementById('devive_title3');
+        let titleDisplayInputs3 = document.getElementById('device-body-title3');
+        let titleDisplayButton3 = document.getElementById('4');
+        titleDisplay3.style.display="none";
+        titleDisplayInputs3.style.display="none";
+        titleDisplayButton3.style.display="none";
+        document.getElementById('devive_title3').value = "";
+        
+        console.warn(Title3)
+        // for title ends
+
+        var strokeColor3 = document.getElementById("circle-static3");
+        console.warn(strokeColor3);
+            strokeColor3.classList.remove("circle-static");         
+            strokeColor3.classList.add("circle-static1");
+
+    }
+
+    function sessionTimeInput4() {
+        var hours = parseInt(document.getElementById('session-hours-input4').value) || 0;
+        var minutes = parseInt(document.getElementById('session-minutes-input4').value) || 0;
+        if (hours >= 0 && minutes >= 0) {
+            sessionLength4 = (hours * 3600) + (minutes * 60);
+            val4 = sessionLength4;
+            showSessionLength4();
+            showTime4();
+            document.getElementById('session-hours-input4').value = '';
+            document.getElementById('session-minutes-input4').value = '';
+        }
+
+        var Title4 = document.getElementById('devive_title4').value;
+        
+        document.getElementById('timer-body-title4').innerHTML=Title4;
+        let titleDisplay4 = document.getElementById('devive_title4');
+        let titleDisplayInputs4 = document.getElementById('device-body-title4');
+        let titleDisplayButton4 = document.getElementById('5');
+        titleDisplay4.style.display="none";
+        titleDisplayInputs4.style.display="none";
+        titleDisplayButton4.style.display="none";
+        document.getElementById('devive_title4').value = "";
+        
+        console.warn(Title4)
+        // for title ends
+4
+        var strokeColor4 = document.getElementById("circle-static4");
+        console.warn(strokeColor4);
+            strokeColor4.classList.remove("circle-static");         
+            strokeColor4.classList.add("circle-static1");
+
+    }
+
+    document.getElementById('start-btn').addEventListener('click', function() {
+        if (!timer) {
+            timer = setInterval(function() {
+                val--;
+                showTime();
+                if (val <= 0) {
+                    clearInterval(timer);
+                    timer = null;
+                    playSound(); // Play sound when timer ends
+                    playSound(); // Play sound when timer ends
+                }
+                // Calculate the angle based on elapsed time and total session length
+                var angle = (sessionLength - val) / sessionLength * 360;
+                // Start the animation when the timer starts
+                draw(angle);
+            }, 1000);
+        }                                                   
+    });
+
+    document.getElementById('start-btn1').addEventListener('click', function() {
+        if (!timer1) {
+            timer1 = setInterval(function() {
+                val1--;
+                showTime1();
+                if (val1 <= 0) {
+                    clearInterval(timer1);
+                    timer1 = null;
+                    playSound(); // Play sound when timer ends
+                    playSound(); // Play sound when timer ends
+                }
+                // Calculate the angle based on elapsed time and total session length
+                var angle = (sessionLength1 - val1) / sessionLength1 * 360;
+                // Start the animation when the timer starts
+                drawArc1(angle);
+            }, 1000);
+        }
+    });
+
+    document.getElementById('start-btn2').addEventListener('click', function() {
+        if (!timer2) {
+            timer2 = setInterval(function() {
+                val2--;
+                showTime2();
+                if (val2 <= 0) {
+                    clearInterval(timer2);
+                    timer2 = null;
+                    playSound(); // Play sound when timer ends
+                    playSound(); // Play sound when timer ends
+                }
+                // Calculate the angle based on elapsed time and total session length
+                var angle = (sessionLength2 - val2) / sessionLength2 * 360;
+                // Start the animation when the timer starts
+                drawArc2(angle);
+            }, 1000);
+        }
+    });
+
+    document.getElementById('start-btn3').addEventListener('click', function() {
+        if (!timer3) {
+            timer3 = setInterval(function() {
+                val3--;
+                showTime3();
+                if (val3 <= 0) {
+                    clearInterval(timer3);
+                    timer3 = null;
+                    playSound(); // Play sound when timer ends
+                    playSound(); // Play sound when timer ends
+                }
+                // Calculate the angle based on elapsed time and total session length
+                var angle = (sessionLength3 - val3) / sessionLength3 * 360;
+                // Start the animation when the timer starts
+                drawArc3(angle);
+            }, 1000);
+        }
+    });
+
+    document.getElementById('start-btn4').addEventListener('click', function() {
+        if (!timer4) {
+            timer4 = setInterval(function() {
+                val4--;
+                showTime4();
+                if (val4 <= 0) {
+                    clearInterval(timer4);
+                    timer4 = null;
+                    playSound(); // Play sound when timer ends
+                    playSound(); // Play sound when timer ends
+                }
+                // Calculate the angle based on elapsed time and total session length
+                var angle = (sessionLength4 - val4) / sessionLength4 * 360;
+                // Start the animation when the timer starts
+                drawArc4(angle);
+            }, 1000);
+        }
+    });
+
+    document.getElementById('pause-btn').addEventListener('click', function() {
+        clearInterval(timer);
+        timer = null;
+    });
+
+    document.getElementById('pause-btn1').addEventListener('click', function() {
+        clearInterval(timer1);
+        timer1 = null;
+    });
+
+    document.getElementById('pause-btn2').addEventListener('click', function() {
+        clearInterval(timer2);
+        timer2 = null;
+    });
+
+    document.getElementById('pause-btn3').addEventListener('click', function() {
+        clearInterval(timer3);
+        timer3 = null;
+    });
+
+    document.getElementById('pause-btn4').addEventListener('click', function() {
+        clearInterval(timer4);
+        timer4 = null;
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', function() {
+
+        clearInterval(timer);
+        timer = null;
+        val = sessionLength;
+        showTime();
+        var sessionLengths = 0;
+        document.getElementById('timer-text').textContent = formatTime(sessionLengths);
+        // document.getElementById('1').style.display= 'none';
+        document.querySelector('.circle-dynamic').removeAttribute('r');
+        document.getElementById('arc').setAttribute('d', '');
+
+        let titleDisplay = document.getElementById('devive_title');
+        let titleDisplayText = document.getElementById('timer-body-title');
+        titleDisplayText.style.display="none";
+        titleDisplay.style.display="block";
+        titleDisplay.style.margin="10px auto";
+
+        
+        let titleDisplayInputs = document.getElementById('device-body-title');
+        let titleDisplayButton = document.getElementById('1');
+        titleDisplayInputs.style.display="block";
+        titleDisplayButton.style.display="block";
+        titleDisplay.style.margin="10px auto";
+
+        let strokeColor5 = document.getElementById('circle-static');
+            strokeColor5.classList.add("circle-static");
+            strokeColor5.classList.remove("circle-static1");
+        
+    });
+
+
+    document.getElementById('reset-btn1').addEventListener('click', function() {
+        clearInterval(timer1);
+        timer1 = null;
+        val1 = sessionLength1;
+        var circleFiller = document.querySelector('.circle-dynamic')
+        showTime1();
+        var sessionLengths1 = 0;
+        document.getElementById('timer-text1').textContent = formatTime(sessionLengths1);
+        // var circleDynamicElements = document.querySelector('.circle-dynamic');
+        // var circleDynamicElements1 = document.getElementById('circle-dynamic1');
+        document.querySelector('.circle-dynamic1').removeAttribute('r');
+        document.getElementById('arc1').setAttribute('d', '');
+        
+        let titleDisplay1 = document.getElementById('devive_title1');
+        let titleDisplayText1 = document.getElementById('timer-body-title1');
+        titleDisplayText1.style.display="none";
+        titleDisplay1.style.display="block";
+        titleDisplay1.style.margin="10px auto";
+
+        
+        let titleDisplayInputs1 = document.getElementById('device-body-title1');
+        let titleDisplayButton1 = document.getElementById('2');
+        titleDisplayInputs1.style.display="block";
+        titleDisplayButton1.style.display="block";
+        titleDisplayButton1.style.margin="10px auto";
+
+        var strokeColor6 = document.getElementById("circle-static1");
+            strokeColor6.classList.remove("circle-static1");         
+            strokeColor6.classList.add("circle-static2");
+
+    });
+
+    document.getElementById('reset-btn2').addEventListener('click', function() {
+        clearInterval(timer2);
+        timer2 = null;
+        val2 = sessionLength2;
+        showTime2();
+        var sessionLengths2 = 0;
+        document.getElementById('timer-text2').textContent = formatTime(sessionLengths2);
+        // var circleDynamicElements = document.querySelector('.circle-dynamic');
+        // var circleDynamicElements1 = document.getElementById('circle-dynamic1');
+        document.querySelector('.circle-dynamic2').removeAttribute('r');
+        document.getElementById('arc2').setAttribute('d', '');
+
+        let titleDisplay2 = document.getElementById('devive_title2');
+        let titleDisplayText2 = document.getElementById('timer-body-title2');
+        titleDisplayText2.style.display="none";
+        titleDisplay2.style.display="block";
+        titleDisplay2.style.margin="10px auto";
+
+        
+        let titleDisplayInputs2 = document.getElementById('device-body-title2');
+        let titleDisplayButton2 = document.getElementById('3');
+        titleDisplayInputs2.style.display="block";
+        titleDisplayButton2.style.display="block";
+        titleDisplayButton2.style.margin="10px auto";
+
+        var strokeColor7 = document.getElementById("circle-static2");
+            strokeColor7.classList.remove("circle-static1");         
+            strokeColor7.classList.add("circle-static");
+        
+    });
+
+    document.getElementById('reset-btn3').addEventListener('click', function() {
+        clearInterval(timer3);
+        timer3 = null;
+        val3 = sessionLength3;
+        showTime3();
+        var sessionLengths3 = 0;
+        document.getElementById('timer-text3').textContent = formatTime(sessionLengths3);
+        // var circleDynamicElements = document.querySelector('.circle-dynamic');
+        // var circleDynamicElements1 = document.getElementById('circle-dynamic1');
+        document.querySelector('.circle-dynamic3').removeAttribute('r');
+        document.getElementById('arc3').setAttribute('d', '');
+
+        let titleDisplay3 = document.getElementById('devive_title3');
+        let titleDisplayText3 = document.getElementById('timer-body-title3');
+        titleDisplayText3.style.display="none";
+        titleDisplay3.style.display="block";
+        titleDisplay3.style.margin="10px auto";
+
+        
+        let titleDisplayInputs3 = document.getElementById('device-body-title3');
+        let titleDisplayButton3 = document.getElementById('4');
+        titleDisplayInputs3.style.display="block";
+        titleDisplayButton3.style.display="block";
+        titleDisplayButton3.style.margin="10px auto";
+
+        var strokeColor8 = document.getElementById("circle-static3");
+            strokeColor8.classList.remove("circle-static1");         
+            strokeColor8.classList.add("circle-static");
+        
+    });
+
+    document.getElementById('reset-btn4').addEventListener('click', function() {
+        clearInterval(timer4);
+        timer4 = null;
+        val4 = sessionLength4;
+        showTime4();
+        var sessionLengths4 = 0;
+        document.getElementById('timer-text4').textContent = formatTime(sessionLengths4);
+        // var circleDynamicElements = document.querySelector('.circle-dynamic');
+        // var circleDynamicElements1 = document.getElementById('circle-dynamic1');
+        document.querySelector('.circle-dynamic4').removeAttribute('r');
+        document.getElementById('arc4').setAttribute('d', '');
+
+        let titleDisplay4 = document.getElementById('devive_title4');
+        let titleDisplayText4 = document.getElementById('timer-body-title4');
+        titleDisplayText4.style.display="none";
+        titleDisplay4.style.display="block";
+        titleDisplay4.style.margin="10px auto";
+
+        
+        let titleDisplayInputs4 = document.getElementById('device-body-title4');
+        let titleDisplayButton4 = document.getElementById('5');
+        titleDisplayInputs4.style.display="block";
+        titleDisplayButton4.style.display="block";
+        titleDisplayButton4.style.margin="10px auto";
+
+        var strokeColor9 = document.getElementById("circle-static4");
+            strokeColor9.classList.remove("circle-static1");         
+            strokeColor9.classList.add("circle-static");
+        
+    });
+
+    // Add the polarToCartesian and draw1 functions
+    function polarToCartesian(r, theta, offset) {
+        var x = offset - r * Math.cos(Math.PI * theta / 180.0);
+        var y = offset - r * Math.sin(Math.PI * theta / 180.0);
+        return [x.toFixed(5), y.toFixed(5)];
+    }
+
+    function draw(angle) {
+        var offset = 100;
+        var radius = 90;
+        if (angle === 0) {
+            document.querySelector('.circle-dynamic').removeAttribute('r');
+            document.getElementById('arc').setAttribute('d', '');
+        } else if (angle === 360) {
+            document.querySelector('.circle-dynamic').setAttribute('r', radius);
+        } else {
+            document.querySelector('.circle-dynamic').removeAttribute('r');
+            var startPoint = offset - radius;
+            var coords = polarToCartesian(radius, angle, offset);
+            var large1Flag = angle <= 180 ? "0" : "1";
+            var d =
+                "M " +
+                startPoint +
+                " " +
+                offset +
+                " A " +
+                radius +
+                " " +
+                radius +
+                " 0 " +
+                large1Flag +
+                " 1 " +
+                coords[0] +
+                " " +
+                coords[1];
+            document.getElementById("arc").setAttribute("d", d);
+        }
+    }
+
+    function drawArc1(angle) {
+        var offset = 100;
+        var radius = 90;
+        // var circleDynamicElements = document.querySelectorAll('.circle-dynamic');
+        if (angle === 0) {
+            document.querySelector('.circle-dynamic1').removeAttribute('r');
+            document.getElementById('arc1').setAttribute('d', '');
+        } else if (angle === 360) {
+            document.querySelector('.circle-dynamic1').setAttribute('r', radius);
+        } else {
+            document.querySelector('.circle-dynamic1').removeAttribute('r');
+            var startPoint = offset - radius;
+            var coords = polarToCartesian(radius, angle, offset);
+            var largeArcFlag = angle <= 180 ? "0" : "1";
+            var d =
+                "M " +
+                startPoint +
+                " " +
+                offset +
+                " A " +
+                radius +
+                " " +
+                radius +
+                " 0 " +
+                largeArcFlag +
+                " 1 " +
+                coords[0] +
+                " " +
+                coords[1];
+            document.getElementById("arc1").setAttribute("d", d);
+        }
+    }
+
+    function drawArc2(angle) {
+        var offset = 100;
+        var radius = 90;
+        if (angle === 0) {
+            document.querySelector('.circle-dynamic2').removeAttribute('r');
+            document.getElementById('arc2').setAttribute('d', '');
+        } else if (angle === 360) {
+            document.querySelector('.circle-dynamic2').setAttribute('r', radius);
+        } else {
+            document.querySelector('.circle-dynamic2').removeAttribute('r');
+            var startPoint = offset - radius;
+            var coords = polarToCartesian(radius, angle, offset);
+            var largeArcFlag = angle <= 180 ? "0" : "1";
+            var d =
+                "M " +
+                startPoint +
+                " " +
+                offset +
+                " A " +
+                radius +
+                " " +
+                radius +
+                " 0 " +
+                largeArcFlag +
+                " 1 " +
+                coords[0] +
+                " " +
+                coords[1];
+            document.getElementById("arc2").setAttribute("d", d);
+        }
+    }
+
+    function drawArc3(angle) {
+        var offset = 100;
+        var radius = 90;
+        if (angle === 0) {
+            document.querySelector('.circle-dynamic3').removeAttribute('r');
+            document.getElementById('arc3').setAttribute('d', '');
+        } else if (angle === 360) {
+            document.querySelector('.circle-dynamic3').setAttribute('r', radius);
+        } else {
+            document.querySelector('.circle-dynamic3').removeAttribute('r');
+            var startPoint = offset - radius;
+            var coords = polarToCartesian(radius, angle, offset);
+            var largeArcFlag = angle <= 180 ? "0" : "1";
+            var d =
+                "M " +
+                startPoint +
+                " " +
+                offset +
+                " A " +
+                radius +
+                " " +
+                radius +
+                " 0 " +
+                largeArcFlag +
+                " 1 " +
+                coords[0] +
+                " " +
+                coords[1];
+            document.getElementById("arc3").setAttribute("d", d);
+        }
+    }
+
+    function drawArc4(angle) {
+        var offset = 100;
+        var radius = 90;
+        if (angle === 0) {
+            document.querySelector('.circle-dynamic4').removeAttribute('r');
+            document.getElementById('arc4').setAttribute('d', '');
+        } else if (angle === 360) {
+            document.querySelector('.circle-dynamic4').setAttribute('r', radius);
+        } else {
+            document.querySelector('.circle-dynamic4').removeAttribute('r');
+            var startPoint = offset - radius;
+            var coords = polarToCartesian(radius, angle, offset);
+            var largeArcFlag = angle <= 180 ? "0" : "1";
+            var d =
+                "M " +
+                startPoint +
+                " " +
+                offset +
+                " A " +
+                radius +
+                " " +
+                radius +
+                " 0 " +
+                largeArcFlag +
+                " 1 " +
+                coords[0] +
+                " " +
+                coords[1];
+            document.getElementById("arc4").setAttribute("d", d);
+        }
+    }
+
+    function playSound() {
+        var audio = document.getElementById('audio1');
+        if (audio) {
+            audio.play();
+        }
+    }
+    // document.getElementById('audio1').play();
+
+    function deviceTitle(){
+        var Title = document.getElementById('devive_title').value;
+        
+        document.getElementById('device-title').innerHTML=Title;
+        let titleDisplay = document.getElementById('timer-body-title');
+        titleDisplay.style.display="none";
+        document.getElementById('devive_title').value = "";
+        
+        console.warn(Title)
+    }
+
+    
+</script>
+</body>
+</html>

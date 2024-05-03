@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Hello, world!</title>
+
+    <style>
+        .nav-item, .nav-item button{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            font-style: italic;
+            color: #000000;
+        }
+      .trial_button:hover{
+      	background-color: #ffffff!important;
+        border: 1px solid #561B1F!important;
+        color: #561B1F!important;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="z-index: 999; background-color: #000000;">
+        <div class="container-fluid">
+            <a class="navbar-brand pt-0 pb-0" href="#" style="position: relative;top: 0; left: 50%; transform: translate(-50%, 0);">
+                <img alt="Logo-Img" src="https://i.ibb.co/rZzLt0b/Logo-PNG-05.png" height="55" width="75"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" aria-current="page" href="#">PRICING</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">FAQS</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <button class="btn btn-sm text-white trial_button" type="button" style="padding: 0.25rem 2rem;border-radius: 0.5rem;">14-DAY FREE TRIAL</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var navbarToggler = document.querySelector('.navbar-toggler');
+            var navbarCollapse = document.getElementById('navbarNav');
+
+            navbarCollapse.addEventListener('click', function(event) {
+                if (event.target.classList.contains('nav-link') || event.target.classList.contains('trial_button')) {
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarToggler.click();
+                    }
+                }
+            });
+        });
+    </script>
+
+
+  </body>
+</html>
